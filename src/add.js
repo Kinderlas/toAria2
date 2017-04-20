@@ -11,12 +11,15 @@ function add(down) {
 	if (Math.abs(down.fileSize) > size) {
 		this.aria2_obj = combination(down);
 		var ifpostback = postaria2obj(this.aria2_obj);
-		if (ifpostback == "base64_error") {
-			var notification = new Notification("成功！", { body: "添加任务至 aria2 出错！" });
-		} else {
+		if (ifpostback != "base64_error") {
 			chrome.downloads.cancel(down.id, function (s) { });
-			var notification = new Notification("成功！", { body: "下载已送往aria2，请前往确认" });
 		}
+		// if (ifpostback == "base64_error") {
+		// 	var notification = new Notification("成功！", { body: "添加任务至 aria2 出错！" });
+		// } else {
+		// 	chrome.downloads.cancel(down.id, function (s) { });
+		// 	var notification = new Notification("成功！", { body: "下载已送往aria2，请前往确认" });
+		// }
 	}
 	//alert(down.fileSize);
 }
